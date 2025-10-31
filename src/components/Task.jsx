@@ -80,7 +80,7 @@ function Task(props) {
   }
   return (
     <div>
-      <div className="bg-white px-4 my-2 rounded-lg shadow-md border border-emerald-200 pb-2.5">
+      <div className="bg-white px-4 my-2 rounded-lg shadow-md border border-emerald-200 pb-2.5 ">
         <section className="flex items-center justify-between pt-2.5">
           <div className="flex items-center w-[60%]">
             {props.active === "pending" && (
@@ -102,7 +102,7 @@ function Task(props) {
               <img
                 src={editIcon}
                 alt="edit"
-                className="w-5 h-5 mx-2 hover:cursor-pointer hover:invert "
+                className="w-5 h-5 md:mx-2 hover:cursor-pointer hover:invert "
                 onClick={() => setIsOpen(true)}
               />
             )}
@@ -110,7 +110,7 @@ function Task(props) {
               <img
                 src={deleteIcon}
                 alt="edit"
-                className="w-5 h-5 mx-2 hover:cursor-pointer hover:invert "
+                className="w-5 h-5 md:mx-2 hover:cursor-pointer hover:invert "
                 onClick={handleDelete}
               />
             )}

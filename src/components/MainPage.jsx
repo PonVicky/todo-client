@@ -10,6 +10,18 @@ function MainPage() {
   const [deletedData, setDeletedData] = useState([]);
   const [completedData, setCompletedData] = useState([]);
   const notify = () => toast("Task Added Successfully!");
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    handleResize(); // Set initial value
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   const [newTask, setNewTask] = useState({
     taskName: "",
@@ -122,20 +134,31 @@ function MainPage() {
           Add Task
         </button>
       </div>
-      <Box sx={{ width: "100%", typography: "body1", mt: 2 }}>
+      <Box
+        sx={{
+          width: {
+            xs: "100%", // for small screens
+            md: "100%", // for medium and above
+          },
+          typography: "body1",
+          mt: 2,
+        }}
+      >
         {/* Tab Headers */}
         <Tabs
           value={value}
           onChange={handleChange}
-          centered
+          variant={isMobile ? "scrollable" : ""}
           textColor="primary"
+          scrollButtons={false}
+          centered={!isMobile}
           indicatorColor="primary"
         >
           <Tab label="Tasks" />
           <Tab label="Completed Tasks" onClick={viewCompletedTasks} />
           <Tab label="Deleted Tasks" onClick={viewDeletedTasks} />
         </Tabs>
-        <div className="mx-auto w-[50%]">
+        <div className="mx-auto w-full md:w-[50%]">
           {/* Tab Content */}
           {value === 0 && (
             <Box sx={{ p: 3 }}>
